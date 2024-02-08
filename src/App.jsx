@@ -21,6 +21,11 @@ const CrudExample = () => {
   };
 
   const handleCreate = async () => {
+    if (newItem.trim() === '') {
+      alert('Por favor, insira uma descrição válida para a tarefa.');
+      return;
+    }
+    
     try {
       await axios.post('http://localhost:3000/tarefa', { description: newItem });
       fetchData();
@@ -67,7 +72,7 @@ const CrudExample = () => {
             onChange={(e) => setNewItem(e.target.value)}
           />
           <br />
-          <button onClick={() => { handleCreate();  }}>Adicionar</button>
+          <button onClick={() => { handleCreate(); }}>Adicionar</button>
         </div>
 
         <ul>
@@ -80,13 +85,13 @@ const CrudExample = () => {
                     value={newItem}
                     onChange={(e) => setNewItem(e.target.value)}
                   />
-                  <button onClick={() => { handleEdit(item.id, newItem);  }}>Salvar</button>
+                  <button onClick={() => { handleEdit(item.id, newItem); }}>Salvar</button>
                 </>
               ) : (
                 <>
                   {item.description}
-                  <button className="edit" onClick={() => { setEditedItem(item.id);  }}>Editar</button>
-                  <button className="delete" onClick={() => { handleDelete(item.id);  }}>Excluir</button>
+                  <button className="edit" onClick={() => { setEditedItem(item.id); }}>Editar</button>
+                  <button className="delete" onClick={() => { handleDelete(item.id); }}>Excluir</button>
                 </>
               )}
             </li>
